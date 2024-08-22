@@ -1,6 +1,6 @@
 {
   "name": "ashes-wreath",
-  "version": "0.0.9",
+  "version": "0.1.2",
   "codename": "Nightwalk",
   "module": "index.ts",
   "type": "module",

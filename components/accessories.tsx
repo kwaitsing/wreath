@@ -20,7 +20,7 @@ export const SnackBar = (opt: {
 export const FatalErr = (opt: {
     msg: string
     children?: ReactNode
-    className: string
+    className?: string
 }) => {
     return (
         <>
@@ -39,7 +39,8 @@ export const NavBar = (opt: {
     primaryIndex: number
     items: NavBarItem[]
     children?: ReactNode
-    className: string
+    className?: string
+    replaceHistory?: boolean
 }) => {
     const nav = useNavigate()
     return (
@@ -48,7 +49,9 @@ export const NavBar = (opt: {
             {
                 opt.items.map((obj, index) => {
                     return (
-                        <a key={index} onClick={() => obj.action ? obj.action : obj.link ? nav(obj.link) : null} className={index === opt.primaryIndex ? 'primary' : ''}>
+                        <a key={index} onClick={() => obj.action ? obj.action : obj.link ? nav(obj.link, {
+                            ...(opt.replaceHistory !== undefined ? { replace: opt.replaceHistory } : null)
+                        }) : null} className={index === opt.primaryIndex ? 'primary' : ''}>
                             <i>
                                 {obj.icon}
                             </i>
@@ -67,7 +70,8 @@ export const Drawer = (opt: {
     primaryIndex: number
     items: NavBarItem[]
     children?: ReactNode
-    className: string
+    className?: string
+    replaceHistory?: boolean
 }) => {
     const nav = useNavigate()
     return (
@@ -76,7 +80,9 @@ export const Drawer = (opt: {
             {
                 opt.items.map((obj, index) => {
                     return (
-                        <a key={index} onClick={() => obj.action ? obj.action : obj.link ? nav(obj.link) : null} className={(index === opt.primaryIndex) ? 'active' : ''}>
+                        <a key={index} onClick={() => obj.action ? obj.action : obj.link ? nav(obj.link, {
+                            ...(opt.replaceHistory !== undefined ? { replace: opt.replaceHistory } : null)
+                        }) : null} className={(index === opt.primaryIndex) ? 'active' : ''}>
                             <i>{obj.icon}</i>
                             <span>{obj.text}</span>
                         </a>
@@ -92,7 +98,8 @@ export const ExpandDrawer = (opt: {
     primaryIndex: number
     items: NavBarItem[]
     children?: ReactNode
-    className: string
+    className?: string
+    replaceHistory?: boolean
 }) => {
     const nav = useNavigate()
     return (
@@ -106,7 +113,9 @@ export const ExpandDrawer = (opt: {
             {
                 opt.items.map((obj, index) => {
                     return (
-                        <article key={index} onClick={() => obj.action ? obj.action : obj.link ? nav(obj.link) : null} className={(index === opt.primaryIndex) ? 'primary' : ''}>
+                        <article key={index} onClick={() => obj.action ? obj.action : obj.link ? nav(obj.link, {
+                            ...(opt.replaceHistory !== undefined ? { replace: opt.replaceHistory } : null)
+                        }) : null} className={(index === opt.primaryIndex) ? 'primary' : ''}>
                             <div className="row">
                                 <i className="small-margin">{obj.icon}</i>
                                 <div className="max">
